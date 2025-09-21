@@ -1,0 +1,269 @@
++<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 50%;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-gap: 20px;
+        }
+        
+        .payment-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .payment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+        }
+        
+        .payment-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .payment-details {
+            margin-top: 15px;
+        }
+        
+        .payment-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4b6cb7;
+        }
+        
+        .payment-info p {
+            margin: 5px 0;
+            font-family: monospace;
+            font-size: 16px;
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            background-color: #4b6cb7;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #3a5795;
+        }
+        
+        .qris-image {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .qris-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: white;
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            font-size: 14px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .payment-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="https://files.catbox.moe/" alt="Logo Pembayaran" onerror="this.src='https://via.placeholder.com/120?text=Logo'">
+            </div>
+            <h1>Payment Gateway</h1>
+            <p>Pilih metode pembayaran yang Anda inginkan</p>
+        </header>
+        
+        <div class="payment-methods">
+            <!-- DANA -->
+            <div class="payment-card">
+                <div class="payment-header">
+                    <div class="payment-icon">💳</div>
+                    <h2 class="payment-title">DANA</h2>
+                </div>
+                <div class="payment-details">
+                    <div class="payment-info">
+                        <p>Nomor DANA: <strong id="dana-account">081542527849</strong></p>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('dana-account')">Salin Nomor</button>
+                    <div class="instructions">
+                        <p><strong>Cara pembayaran:</strong> Transfer melalui aplikasi DANA ke nomor di atas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gopay -->
+            <div class="payment-card">
+                <div class="payment-header">
+                    <div class="payment-icon">📱</div>
+                    <h2 class="payment-title">Gopay</h2>
+                </div>
+                <div class="payment-details">
+                    <div class="payment-info">
+                        <p>Nomor Gopay: <strong id="gopay-account">085931081614</strong></p>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('gopay-account')">Salin Nomor</button>
+                    <div class="instructions">
+                        <p><strong>Cara pembayaran:</strong> Transfer melalui aplikasi Gojek ke nomor di atas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- QRIS -->
+            <div class="payment-card">
+                <div class="payment-header">
+                    <div class="payment-icon">🔲</div>
+                    <h2 class="payment-title">QRIS</h2>
+                </div>
+                <div class="payment-details">
+                    <div class="qris-image">
+                        <img src="https://files.catbox.moe/njxjvk.jpg" alt="QR Code" onerror="this.src='https://via.placeholder.com/300?text=QRIS+Tidak+Tersedia'">
+                    </div>
+                    <div class="instructions">
+                        <p><strong>Cara pembayaran:</strong> Scan QR code di atas menggunakan aplikasi e-wallet atau mobile banking yang mendukung QRIS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Payment Gateway. Semua transaksi dilindungi.</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent || element.innerText;
+            
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            alert('Teks berhasil disalin: ' + text);
+        }
+    </script>
+</body>
+</html>
